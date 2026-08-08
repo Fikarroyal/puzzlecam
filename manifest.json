@@ -1,0 +1,14 @@
+{
+  "name": "Puzzle·Cam — Hand Gesture Capture",
+  "short_name": "Puzzle·Cam",
+  "description": "Jepret foto pakai gestur tangan, susun jadi puzzle, kumpulkan strip fotomu.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#07080b",
+  "theme_color": "#07080b",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

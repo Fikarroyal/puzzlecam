@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#07080b" />
+<meta name="description" content="Puzzle·Cam — jepret foto pakai gestur tangan, susun jadi puzzle, kumpulkan strip fotomu." />
+<title>Puzzle·Cam — Tangkap Foto dengan Gestur Tangan</title>
+
+<link rel="icon" href="icon.svg" type="image/svg+xml" />
+<link rel="manifest" href="manifest.json" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+  rel="stylesheet"
+/>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div class="app" id="app">
+
+  <!-- ============ STAGE (camera + overlays) ============ -->
+  <section class="stage" id="stage">
+    <video id="webcam" class="webcam" autoplay playsinline muted></video>
+    <canvas id="sceneCanvas" class="scene-canvas"></canvas>
+    <div class="grain" aria-hidden="true"></div>
+    <div class="cine-tint" aria-hidden="true"></div>
+    <div class="vignette" aria-hidden="true"></div>
+
+    <header class="hud-top">
+      <div class="brand">
+        <span class="brand-mark">PUZZLE<span class="brand-dot">·</span>CAM</span>
+        <span class="brand-sub">TANGKAP FOTO DENGAN GESTUR TANGAN</span>
+      </div>
+      <div class="status-pill" id="statusPill" data-tone="idle">
+        <span class="status-dot" id="statusDot"></span>
+        <span class="status-text" id="statusText">MENYIAPKAN…</span>
+      </div>
+    </header>
+
+    <div class="progress-badge" id="progressBadge" hidden>
+      <span id="progressText">0 / 9 KEPING TERPASANG</span>
+    </div>
+
+    <div class="stage-controls" id="stageControls">
+      <button class="ghost-btn" id="captureBtn" type="button" hidden>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M4 8.5A2.5 2.5 0 0 1 6.5 6h1.86c.4 0 .77-.2 1-.53l.9-1.28A1.5 1.5 0 0 1 11.5 3.5h1c.5 0 .96.24 1.24.64l.9 1.28c.23.33.6.53 1 .53H17.5A2.5 2.5 0 0 1 20 8.5v9A2.5 2.5 0 0 1 17.5 20h-11A2.5 2.5 0 0 1 4 17.5v-9Z" stroke="currentColor" stroke-width="1.6"/>
+          <circle cx="12" cy="13" r="3.2" stroke="currentColor" stroke-width="1.6"/>
+        </svg>
+        <span>Ambil Foto</span>
+      </button>
+      <button class="ghost-btn accent" id="saveBtn" type="button" hidden>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M5 12.5 10 17.5 19 6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>Simpan Puzzle</span>
+      </button>
+    </div>
+
+    <p class="hint-bar" id="hintBar"></p>
+
+    <!-- Loading overlay -->
+    <div class="overlay loading-overlay" id="loadingOverlay">
+      <div class="spinner" aria-hidden="true"></div>
+      <p class="loader-text" id="loaderText">Menyiapkan kamera &amp; model deteksi tangan…</p>
+    </div>
+
+    <!-- Error banner -->
+    <div class="overlay error-overlay" id="errorBanner" hidden>
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M12 9v4.5M12 16.5h.01M10.3 3.9 2.5 17.5A1.8 1.8 0 0 0 4.06 20.2h15.88a1.8 1.8 0 0 0 1.56-2.7L13.7 3.9a1.8 1.8 0 0 0-3.4 0Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+      </svg>
+      <p class="error-text" id="errorText">Tidak dapat mengakses kamera.</p>
+      <button class="retry-btn" id="errorRetry" type="button">Coba Lagi</button>
+    </div>
+  </section>
+
+  <!-- ============ STRIP PANEL (sidebar) ============ -->
+  <aside class="strip-panel" id="stripPanel">
+    <div class="strip-header">
+      <span class="strip-title">STRIP FOTO</span>
+      <span class="strip-count" id="galleryCount">0 / 3</span>
+    </div>
+
+    <p class="strip-complete-msg" id="stripCompleteMsg" hidden>
+      Strip lengkap, silahkan unduh atau reset untuk mulai lagi.
+    </p>
+
+    <p class="strip-empty" id="galleryEmpty">
+      Puzzle yang sudah kamu selesaikan akan muncul di sini.
+    </p>
+
+    <div class="strip-list" id="galleryStrip"></div>
+
+    <div class="strip-actions">
+      <button class="strip-btn" id="downloadStripBtn" type="button" disabled>Unduh Strip</button>
+      <button class="strip-btn danger" id="resetAllBtn" type="button">Reset Semua</button>
+    </div>
+  </aside>
+
+</div>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>
