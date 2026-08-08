@@ -1,7 +1,7 @@
 {
-  "name": "Puzzle·Cam — Hand Gesture Capture",
+  "name": "Puzzle·Cam",
   "short_name": "Puzzle·Cam",
-  "description": "Jepret foto pakai gestur tangan, susun jadi puzzle, kumpulkan strip fotomu.",
+  "description": "Ambil foto menggunakan gestur tangan, susun jadi puzzle, kumpulkan strip fotomu.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
