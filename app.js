@@ -1,14 +1,3 @@
-// =============================================================
-// PUZZLE·CAM — Hand Gesture Capture
-// Jepret foto dengan membentuk KOTAK pakai dua tangan terbuka,
-// susun jadi puzzle 3x3 (pakai cubit), simpan dengan kepalan tangan,
-// kumpulkan jadi strip foto dengan color grade ala cinema.
-//
-// Deteksi tangan: MediaPipe Tasks Vision (HandLandmarker), via CDN.
-// Semua interaksi juga punya fallback mouse/touch/tombol supaya
-// aplikasi tetap jalan lancar walau kamera/gestur bermasalah.
-// =============================================================
-
 /* ---------------------------------------------------------
    Konfigurasi & konstanta (boleh disetel ulang jika perlu)
 --------------------------------------------------------- */
@@ -1016,10 +1005,10 @@ function updateUIStrings(now) {
     case "tracking": {
       if (handModelState === "loading") {
         setStatus("idle", "MEMUAT GESTUR TANGAN…");
-        setHint("Kamu tetap bisa pakai tombol Ambil Foto sambil menunggu");
+        setHint("Kamu tetap bisa pakai tombol Ambil Foto dulu sambil menunggu");
       } else if (handModelState === "unavailable") {
         setStatus("idle", "MODE MANUAL");
-        setHint("Deteksi gestur tak tersedia — pakai tombol Ambil Foto");
+        setHint("Deteksi gestur sedang proses, silahkan pakai tombol Ambil Foto terlebih dahulu");
       } else if (!handPresent) {
         setStatus("search", "MENCARI TANGAN…");
         setHint("Tunjukkan tanganmu ke kamera");
@@ -1028,7 +1017,7 @@ function updateUIStrings(now) {
         setHint("Tahan terus posisi kotaknya…");
       } else {
         setStatus("active", "BENTUK KOTAK DENGAN TANGAN");
-        setHint("Rentangkan dua tangan terbuka membentuk kotak — bebas arah");
+        setHint("Rentangkan dua tangan terbuka membentuk kotak (bebas arah)");
       }
       break;
     }
@@ -1057,7 +1046,7 @@ function updateUIStrings(now) {
       setHint("");
       break;
     case "complete":
-      setStatus("success", "STRIP LENGKAP — UNDUH ATAU RESET");
+      setStatus("success", "STRIP LENGKAP! UNDUH ATAU RESET");
       setHint("Unduh stripmu atau reset untuk mulai sesi baru");
       break;
     default:
@@ -1079,7 +1068,7 @@ function renderFrame() {
       const res = handLandmarker.detectForVideo(videoEl, now);
       hands = res.landmarks || [];
     } catch (err) {
-      // Jangan biarkan error deteksi menghentikan loop — cukup anggap tak ada tangan frame ini.
+      // Jangan biarkan error deteksi menghentikan loop, cukup anggap tak ada tangan frame ini.
       hands = [];
     }
   }
