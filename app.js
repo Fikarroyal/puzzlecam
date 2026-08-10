@@ -1,6 +1,3 @@
-/* ---------------------------------------------------------
-   Konfigurasi & konstanta (boleh disetel ulang jika perlu)
---------------------------------------------------------- */
 const TASKS_VISION_VERSIONS = ["0.10.17", "0.10.14"];
 const MODEL_URL =
   "https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task";
